@@ -25,8 +25,13 @@ Executes Javascript, Typescript Scripts.
 ## Forbidden directories for Script Filesystem Mirroring
 The Script Filesystem Mirroring will store all Source Files of the Scripts in your Filesystem to allow you to edit the Files in your favourite Script editor beside the Web-Editor. All changes are synced in both directions.
 
-When enabling the Script Filesystem mirroring, please make sure to create a **dedicated new directory** and **do not** use an existing directory with other content. Please also make sure that no other script or process changes files in the provided directory to prevent access issues.
-Any location needs to be writable by the "iobroker" user!
+When enabling the Script Filesystem mirroring, please make sure to create a **dedicated new directory** and **do not** use an existing directory with other content. 
+* Any location needs to be **writable by the `iobroker user`**
+* Make sure that no other scripts or processes change the files in the provided directory. Because of the sync, this could raise access issues.
+	* p.e. the new directory must be **outside** of folders saved by ***backitup adapter*** folders, as it changes all saved pathes on recovery
+	* The new directory could be parallel to iobroker-directories, p.e. `/opt/iobroker/scripts`
+	* Or p.e. simply `/home/<user>/Devel/scripts`, if the user-home is not `/opt/iobroker`
+If directory does not exist, it will be created.
 
 Since v5.5.0 of the JavaScript adapter the following locations (relative to the ioBroker Base directory, usually `/opt/iobroker`) are not allowed to be used:
 * The ioBroker base directory itself and any path above!
